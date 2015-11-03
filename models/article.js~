@@ -1,0 +1,30 @@
+var mongoose = require('mongoose');
+
+exports.articleList = function ( options, callback ) {
+	var article = mongoose.model("Article");
+	
+	article.find( options , function( err, articles ){
+		if(err){
+			return next(err);
+		}else{
+			callback("", articles);
+		}
+	});
+}
+
+exports.addArticle = function( options, callback ){
+	var article = mongoose.model("Article");
+	var add = new article({
+		title: options.title, 
+		subtitle: options.subtitle,
+		author: options.author, 
+		date: options.date, 
+		text: options.text
+	});
+
+	add.save(function(err){
+		if(err) return next(err);
+	});
+
+	callback("", true);
+}

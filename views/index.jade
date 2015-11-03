@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  <!--h1= title-->
+  <!--p Welcome to #{title}-->
+      
+  #wrapper
+
+    h2 Articles
+
+    #articleList
+      table
+        thead
+          tr
+            th Title
+            th Subtitle
+            th Author
+            th Date
+            th Text
+        tbody
+          each article in articles
+            tr
+              td #{article.title}
+              td #{article.subtitle}
+              td #{article.author}
+              td #{article.date}
+              td #{article.text}
+              td 
+                a(href='/articles/remove/' + article._id) remove
+        
+      button(onclick="window.location.href='/articles/new'") Add article
+
+  if(messages.info)
+    span= messages.info
