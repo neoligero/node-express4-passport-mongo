@@ -12,6 +12,17 @@ exports.articleList = function ( options, callback ) {
 }
 
 
+exports.articleListAjax = function ( options, callback ) {
+	var article = mongoose.model("Article");
+	
+	article.find( options , function( err, articles ){
+		if(err) return next(err);
+		
+		res.send(articles);
+	});
+}
+
+
 exports.addArticle = function( data, callback ){
 	var article = mongoose.model("Article");
 	var add = new article({
